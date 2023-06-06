@@ -56,7 +56,28 @@ class Garage {
     this.vehicle = [];
     this.capacity = capacity;
   }
-  add(car) {
-    this.vehicle.push(car);
+  add(item) {
+    console.log(item);
+    if (!item.numWheels)
+      // if (!(item instanceof Vehicle))   ======================> Better Code
+      return console.log("Only vehicles are allowed in here!");
+    else if (this.vehicle.length === this.capacity)
+      return console.log("Sorry, we're full.");
+    this.vehicle.push(item);
+    return console.log("Vehicle added!");
   }
 }
+
+let garage = new Garage(2);
+garage.vehicles; // []
+garage.add(new Car("Hyundai", "Elantra", 2015)); // "Vehicle added!"
+garage.vehicles; // [Car]
+garage.add("Taco"); // "Only vehicles are allowed in here!"
+
+garage.add(new Motorcycle("Honda", "Nighthawk", 2000));
+// "Vehicle added!"
+garage.vehicles; // [Car, Motorcycle]
+
+garage.add(new Motorcycle("Honda", "Nighthawk", 2001));
+// "Sorry, we're full."
+console.log(garage);
